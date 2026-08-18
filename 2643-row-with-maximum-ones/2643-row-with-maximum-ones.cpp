@@ -27,7 +27,9 @@ public:
           sort(mat[i].begin(), mat[i].end());
             int countones = m-lowerbound(mat[i],m,1);
             if(countones>maxones){
+                
                 maxones=countones;
+
                 index = i;
 
             }
