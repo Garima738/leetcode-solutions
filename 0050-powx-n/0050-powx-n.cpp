@@ -1,22 +1,23 @@
 class Solution {
 public:
     double myPow(double x, int n) {
-        if (n == 0) return 1;
-
-        long long N = n;
-
-        if (N < 0) {
-            x = 1 / x;
-            N = -N;
+        double ans = 1;
+        long long nn = n;
+        if(nn<0) {
+            x = 1/x;
+            nn = -nn;
         }
-
-        double half = myPow(x, N / 2);
-        double result = half * half;
-
-        if (N % 2 == 1) {
-            result = x * result;
+        while(nn){
+            if(nn%2==1){
+                ans = ans*x;
+                nn = nn-1;
+            }
+            else{
+                x = x*x;
+                nn/=2;
+            }
         }
-
-        return result;
+        return ans;
+        
     }
 };
