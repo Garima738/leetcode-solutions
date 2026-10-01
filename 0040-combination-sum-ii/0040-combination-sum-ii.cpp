@@ -7,14 +7,14 @@ void combination(int index,vector<int>& ds, vector<vector<int>>& ans,int target,
     }
     for(int i = index;i<candidates.size();i++){
         if(i>index && candidates[i]==candidates[i-1]) continue;
-        if(candidates[i]>target) break;
+        if(candidates[i]<=target) {
             ds.push_back(candidates[i]);
             combination(i+1,ds,ans,target-candidates[i],candidates);
             ds.pop_back();
         
     }
+    }
     
-
 }
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         sort(candidates.begin(),candidates.end());
