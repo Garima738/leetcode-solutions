@@ -1,20 +1,26 @@
 class Solution {
 public:
+void powerset(vector<int>& nums,vector<int>& ds,int index,vector<vector<int>>& ans){
+    int n = nums.size();
+    if(index==n){
+        ans.push_back(ds);
+        return;
+    }
+    ds.push_back(nums[index]);
+    powerset(nums,ds,index+1,ans);
+    ds.pop_back();
+    powerset(nums,ds,index+1,ans);
+
+}
     vector<vector<int>> subsets(vector<int>& nums) {
-       
-        int n = nums.size();
-        int subset = 1<<n;
-         vector<vector<int>>ans;
-        for(int num=0;num<subset;num++){
-            vector<int>temp;
-            for(int i=0;i<n;i++){
-                if(num&(1<<i)){
-                    temp.push_back(nums[i]);
-                }
-            }
-                ans.push_back(temp);           }
-        
+        vector<vector<int>>ans;
+        vector<int>ds;
+        powerset(nums,ds,0,ans);
         return ans;
+       
+      
+
+
         
     }
 };
