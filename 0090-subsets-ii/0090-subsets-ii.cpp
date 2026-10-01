@@ -1,0 +1,27 @@
+class Solution {
+public:
+void subset(vector<int>& nums,vector<vector<int>>& ans, vector<int>& ds,int index){
+    int n = nums.size();
+    //if(index==n){
+        ans.push_back(ds);
+     //   return;
+
+    //}
+    
+    for(int i=index;i<n;i++){
+        if(i>index && nums[i]==nums[i-1]) continue;
+        ds.push_back(nums[i]);
+        subset(nums,ans,ds,i+1);
+        ds.pop_back();
+    }
+    
+}
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>>ans;
+        vector<int>ds;
+        sort(nums.begin(),nums.end());
+        subset(nums,ans,ds,0);
+        return ans;
+        
+    }
+};
