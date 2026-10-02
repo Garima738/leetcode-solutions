@@ -1,39 +1,39 @@
 class Solution {
-private:
-void solve(string digit,string output,int index,vector<string>&ans,string mapping[]){
-    if(index>=digit.length()){
-        ans.push_back(output);
-        return;
-
-
-    }
-
-    int number = digit[index]-'0';
-    string value = mapping[number];
-    for(int i=0;i<value.length();i++){
-        output.push_back(value[i]);
-        solve(digit, output, index+1, ans, mapping);
-        output.pop_back();
-    }
-    
-    
-    }
-
-
 public:
+   vector<string>result;
+   void solve(int index,string &digits,string &temp,unordered_map<char,string>& mp){
+    if(index==digits.length()){
+        result.push_back(temp);
+        return;
+    }
+    char ch = digits[index];
+    string str = mp[ch];
+    for(int i=0;i<str.length();i++){
+        temp.push_back(str[i]);
+        solve(index+1,digits,temp,mp);
+        temp.pop_back();
+            }
+   }
     vector<string> letterCombinations(string digits) {
-        vector<string>ans;
-        if(digits.length()==0)
-        return ans;
-        string output;
-        int index=0;
-        string mapping[10] = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-        solve(digits,output,index,ans,mapping);
-        return ans;
+        if(digits.length()==0){
+            return {};
+        }
+        unordered_map<char,string> mp;
+        mp['2'] = "abc";
+        mp['3'] = "def";
+        mp['4'] = "ghi";
+        mp['5'] = "jkl";
+        mp['6'] = "mno";
+        mp['7'] = "pqrs";
+        mp['8'] = "tuv";
+        mp['9'] = "wxyz";
+        string temp = "";
+        solve(0,digits,temp,mp);
+        return result;
+                        
 
 
-
-
+        
         
     }
 };
