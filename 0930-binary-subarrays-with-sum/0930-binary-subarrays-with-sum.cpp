@@ -30,17 +30,18 @@ public:
                 i++;
             }
 
-            if (goal == 0) {
-                if (sum == 0) {
-                    count += j - i + 1;
-                }
-            } else {
+            // if (goal == 0) {
+            //     if (sum == 0) {
+            //         count += j - i + 1;
+            //     }
+            //}
+            // else {
                 while (sum == goal && i <= j) {
                     count += nextone[j] - j;
                     sum -= nums[i];
                     i++;
                 }
-            }
+            //}
 
             j++;
         }
