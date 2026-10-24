@@ -1,41 +1,36 @@
-
 class Solution {
 public:
-    bool dfs(int node, vector<int> adj[], vector<int> &visited, vector<int> &pathVisited) {
-        visited[node] = 1;
-        pathVisited[node] = 1;
-
-        for (int neighbor : adj[node]) {
-            if (!visited[neighbor]) {
-                if (dfs(neighbor, adj, visited, pathVisited))
-                    return true;
-            }
-            else if (pathVisited[neighbor]) {
-                return true;
-            }
-        }
-
-        pathVisited[node] = 0;
-        return false;
-    }
-
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<int> adj[numCourses];
-
-        for (auto &p : prerequisites) {
-            adj[p[1]].push_back(p[0]);
+       // vector<int> adj[numCourses];
+               vector<vector<int>> adj(numCourses);
+        for(auto it:prerequisites){
+            adj[it[1]].push_back(it[0]);
         }
-
-        vector<int> visited(numCourses, 0);
-        vector<int> pathVisited(numCourses, 0);
-
-        for (int i = 0; i < numCourses; i++) {
-            if (!visited[i]) {
-                if (dfs(i, adj, visited, pathVisited))
-                    return false;
+       vector<int> indegree(numCourses, 0);
+        for(int i=0;i<numCourses;i++){
+            for(auto it:adj[i]){
+                indegree[it]++;
             }
         }
+        queue<int>q;
+        for(int i=0;i<numCourses;i++){
+            if(indegree[i]==0){
+                q.push(i);
 
-        return true;
+            }
+        }
+        vector<int>topo;
+
+        while(!q.empty()){
+            int node = q.front();
+            q.pop();
+            topo.push_back(node);
+            for(auto it:adj[node]){
+                indegree[it]--;
+                if(indegree[it]==0) q.push(it);
+            }
+        }
+        if(topo.size()==numCourses) return true;
+        return false;
     }
 };
