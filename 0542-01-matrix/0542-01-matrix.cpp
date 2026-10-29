@@ -34,8 +34,9 @@ public:
                     int nrow = row + delrow[i];
                     int ncol = col + delcol[i];
                     if(nrow>=0 && nrow<n && ncol >=0 && ncol<m && vis[nrow][ncol]==0){
-                        vis[nrow][ncol]=1;
+                       // vis[nrow][ncol]=1;
                         q.push({{nrow,ncol},steps+1});
+                         vis[nrow][ncol]=1;
 
                     }
                 } 
